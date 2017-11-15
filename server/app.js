@@ -15,6 +15,7 @@ mongoose.connection.openUri(db, (err) => {
 
 var users = require('./routes/users');
 const items = require('./routes/items')
+const carts = require('./routes/carts')
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use(cors())
 
 app.use('/users', users);
 app.use('/items', items)
+app.use('/carts', carts)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
