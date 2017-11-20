@@ -31,7 +31,12 @@ const addNewItem = (req, res) => {
       newItem
     })
   })
-  .catch(err => res.status(500).send(err))
+  .catch(err => {
+    console.log('==============INI ERROR======================');
+    console.log(err);
+    console.log('====================================');
+    res.status(500).send(err)
+  })
 }
 
 const updateAnItem = (req, res) => {

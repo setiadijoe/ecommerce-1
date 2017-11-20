@@ -1,48 +1,52 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <input type="button" v-if="loginStatus === false" value="Sign In" @click="signIn()">
-    <input type="button" v-else value="Sign Out" @click="signOut()">
-      <div class="row">
-        <selling-content v-for="item in items" :key="item._id" :item="item"></selling-content>
-      </div>
+    <navbar></navbar>
+    <div class="row">
+      <selling-content v-for="item in items" :key="item._id" :item="item"></selling-content>
+    </div>
   </div>
 </template>
 
 <script>
+import Navbar from '@/components/Navbar'
 import SellingContent from '@/components/SellingContent'
+import SideBar from '@/components/SideBar'
 import { mapState, mapActions, mapMutations } from 'vuex'
 export default {
   components: {
-    SellingContent
+    SellingContent,
+    Navbar,
+    SideBar
   },
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Treasure Hunt'
     }
   },
   computed: {
-    ...mapState(['items', 'loginStatus'])
+    ...mapState(['items'])
   },
   methods: {
     ...mapActions(['getAllItems']),
-    ...mapMutations(['changeLoginStatus']),
-    signIn () {
-      this.$router.push('/signin')
-    },
-    signOut () {
-      localStorage.removeItem('token')
-      this.$router.push('/signin')
-    }
+    ...mapMutations(['changeLoginStatus'])
   },
   mounted () {
     if (localStorage.getItem('token') !== null) {
       this.getAllItems()
-      this.changeLoginStatus(true)
+      var status = {
+        login: true,
+        admin: localStorage.getItem('isAdmin')
+      }
+      this.changeLoginStatus(status)
     } else {
       this.getAllItems()
-      this.changeLoginStatus(false)
+      var state = {
+        login: false,
+        admin: localStorage.getItem('isAdmin')
+      }
+      this.changeLoginStatus(state)
     }
   }
 }
@@ -50,8 +54,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 h1, h2 {
-  font-weight: normal;
+  font-weight: bold;
+  margin-top: 50px;
+  font-family: 'Sofia';
+  color: blueviolet
 }
 ul {
   list-style-type: none;

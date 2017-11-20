@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import LoginForm from '@/components/LoginForm'
+import AddItems from '@/components/AddItems'
 
 Vue.use(Router)
 
@@ -15,6 +16,10 @@ export default new Router({
     {
       path: '/signin',
       component: LoginForm
+    },
+    {
+      path: '/additem',
+      component: AddItems
     }
   ]
 })

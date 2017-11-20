@@ -1,6 +1,7 @@
 <template>
   <form>
   <fieldset>
+    <router-link type="button" class="btn btn-primary btn-block" to="/">Back To Home</router-link>
     <legend>Login First</legend>
     <div class="form-group">
       <label for="exampleInputUsername">User Name</label>
@@ -40,12 +41,14 @@ export default {
         console.log('sukses gak?')
         console.log(response.data)
         localStorage.setItem('token', response.data.token)
+        localStorage.setItem('isAdmin', response.data.isAdmin)
         this.$router.push('/')
       })
       .catch((error) => {
         console.log('====================================')
         console.log('lalallala')
         console.log('====================================')
+        alert('Username or password not verified!!')
         console.log(error)
       })
     }
@@ -149,6 +152,10 @@ body {
   line-height: var(--bodyLineHeight);
   margin: 0;
   min-height: 100vh;
+}
+
+router-link {
+  color: blue
 }
 
 /* modules/anchor.css */

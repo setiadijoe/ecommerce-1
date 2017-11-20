@@ -50,7 +50,10 @@ const signInUser = (req, res) => {
           isAdmin: userData.isAdmin
         }
         let token = jwt.sign(payload, key)
-        res.status(201).send({ message: 'User has succesfully login', token })
+        console.log('====================================');
+        console.log('sukses gak ', token);
+        console.log('====================================');
+        res.status(201).send({ message: 'User has succesfully login', token, isAdmin: userData.isAdmin })
       } else {
         res.status(401).send({ message: 'password or username not valid' })
       }
