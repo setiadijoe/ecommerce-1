@@ -1,31 +1,48 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+    <input type="button" v-if="loginStatus === false" value="Sign In" @click="signIn()">
+    <input type="button" v-else value="Sign Out" @click="signOut()">
+      <div class="row">
+        <selling-content v-for="item in items" :key="item._id" :item="item"></selling-content>
+      </div>
   </div>
 </template>
 
 <script>
+import SellingContent from '@/components/SellingContent'
+import { mapState, mapActions, mapMutations } from 'vuex'
 export default {
+  components: {
+    SellingContent
+  },
   name: 'HelloWorld',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  computed: {
+    ...mapState(['items', 'loginStatus'])
+  },
+  methods: {
+    ...mapActions(['getAllItems']),
+    ...mapMutations(['changeLoginStatus']),
+    signIn () {
+      this.$router.push('/signin')
+    },
+    signOut () {
+      localStorage.removeItem('token')
+      this.$router.push('/signin')
+    }
+  },
+  mounted () {
+    if (localStorage.getItem('token') !== null) {
+      this.getAllItems()
+      this.changeLoginStatus(true)
+    } else {
+      this.getAllItems()
+      this.changeLoginStatus(false)
     }
   }
 }

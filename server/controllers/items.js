@@ -3,9 +3,15 @@ const Item = require('../models/ItemModel')
 const getAllItems = (req, res) => {
   Item.find()
   .then(allitems => {
+    console.log('====================================');
+    console.log('sukses gak?');
+    console.log('====================================');
     res.status(200).send(allitems)
   })
   .catch(err => {
+    console.log('====================================');
+    console.log('error gak?');
+    console.log('====================================');
     res.status(500).send(err)
   })
 }

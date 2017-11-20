@@ -12,6 +12,10 @@ const cartSchema = new Schema({
   },
   itemslist: [{
     type: Schema.Types.ObjectId,
+    amount: {
+      type: Number,
+      default: 0
+    },
     ref: 'Items'
   }]
 })

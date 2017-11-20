@@ -1,5 +1,4 @@
 const Cart = require('../models/CartModel')
-const Item = require('../models/ItemModel')
 
 const getAllCart = (req, res) => {
   Cart.find({buyer: req.headers.id})
