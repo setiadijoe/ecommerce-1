@@ -27,7 +27,8 @@ const signUpUser = (req, res) => {
   let user = new User({
     name: req.body.name,
     username: req.body.username,
-    password: req.body.password
+    password: req.body.password,
+    isAdmin: req.body.isAdmin
   })
   user.save()
     .then(newUser => {
@@ -67,8 +68,7 @@ const updateUser = (req, res) => {
       $set: {
         name: req.body.name,
         username: req.body.username,
-        password: req.body.password,
-        isAdmin: req.body.isAdmin
+        password: req.body.password
       }
     }
   )

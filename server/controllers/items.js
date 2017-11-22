@@ -20,7 +20,6 @@ const addNewItem = (req, res) => {
   let item = new Item({
     item: req.body.item,
     price: req.body.price,
-    stock: req.body.stock,
     category: req.body.category,
     imgUrl: req.body.imgUrl
   })
@@ -42,8 +41,7 @@ const addNewItem = (req, res) => {
 const updateAnItem = (req, res) => {
   Item.findByIdAndUpdate(req.params.id, {
     $set: {
-      price: req.body.price,
-      stock: req.body.stock
+      price: req.body.price
     }
   }, { new: true })
   .then(updateItem => {

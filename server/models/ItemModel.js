@@ -10,10 +10,6 @@ const itemSchema = new Schema({
     type: Number,
     required: [true, 'Insert with Number']
   },
-  stock: {
-    type: Number,
-    required: [true, 'Input with amount of your stock']
-  },
   category: {
     type: String,
     enum: ['tools', 'food', 'outfits'],
