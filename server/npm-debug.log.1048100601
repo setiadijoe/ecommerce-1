@@ -1,0 +1,28 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'run', 'dev' ]
+2 info using npm@3.10.10
+3 info using node@v8.4.0
+4 verbose run-script [ 'predev', 'dev', 'postdev' ]
+5 info lifecycle server@0.0.0~predev: server@0.0.0
+6 silly lifecycle server@0.0.0~predev: no script for predev, continuing
+7 info lifecycle server@0.0.0~dev: server@0.0.0
+8 verbose lifecycle server@0.0.0~dev: unsafe-perm in lifecycle true
+9 verbose lifecycle server@0.0.0~dev: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/home/yon/PHASE2-Repeat/e-commerce/server/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+10 verbose lifecycle server@0.0.0~dev: CWD: /home/yon/PHASE2-Repeat/e-commerce/server
+11 silly lifecycle server@0.0.0~dev: Args: [ '-c', 'nodemon ./bin/www' ]
+12 silly lifecycle server@0.0.0~dev: Returned: code: null  signal: SIGHUP
+13 verbose stack Error: write EIO
+13 verbose stack     at _errnoException (util.js:1041:11)
+13 verbose stack     at WriteWrap.afterWrite [as oncomplete] (net.js:858:14)
+14 verbose cwd /home/yon/PHASE2-Repeat/e-commerce/server
+15 error Linux 4.4.0-101-generic
+16 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "dev"
+17 error node v8.4.0
+18 error npm  v3.10.10
+19 error code EIO
+20 error errno EIO
+21 error syscall write
+22 error write EIO
+23 error If you need help, you may report this error at:
+23 error     <https://github.com/npm/npm/issues>
+24 verbose exit [ 1, true ]

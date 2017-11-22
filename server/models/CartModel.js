@@ -10,13 +10,21 @@ const cartSchema = new Schema({
     type: Date,
     default: Date.now
   },
+  hasPaid: {
+    type: Boolean,
+    default: false
+  },
   itemslist: [{
-    type: Schema.Types.ObjectId,
+    itemId: {
+      type: Schema.Types.ObjectId,
+      ref: 'Items'
+    },
+    name: String,
+    price: Number, 
     amount: {
       type: Number,
       default: 0
-    },
-    ref: 'Items'
+    }
   }]
 })
 

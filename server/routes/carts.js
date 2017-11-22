@@ -6,5 +6,6 @@ const Auth = require('../helpers/auth')
 router.get('/', Auth.hasLogin, Cart.getAllCart)
 router.post('/', Auth.hasLogin, Cart.addCart)
 router.delete('/:id', Auth.hasLogin, Cart.removeCart)
+router.put('/:id', Auth.hasLogin, Cart.updateProduct)
 
 module.exports = router

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import LoginForm from '@/components/LoginForm'
 import AddItems from '@/components/AddItems'
+import Checkout from '@/components/Checkout'
 
 Vue.use(Router)
 
@@ -20,6 +21,10 @@ export default new Router({
     {
       path: '/additem',
       component: AddItems
+    },
+    {
+      path: '/checkout',
+      component: Checkout
     }
   ]
 })

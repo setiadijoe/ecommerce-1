@@ -9,7 +9,7 @@
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <router-link class="nav-link" to="/">Home <span class="sr-only">(current)</span></router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/additem" v-if="isAdmin === 'true'">Add Items</router-link>
@@ -18,7 +18,7 @@
             <a class="nav-link" href="#">Pricing</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <!-- <a data-toggle="modal" data-target=".bs-example-modal-lg">About</a> -->
           </li>
         </ul>
         <form class="form-inline my-2 my-md-0">
@@ -27,6 +27,7 @@
         </form>
       </div>
     </nav>
+
   </div>
 </template>
 

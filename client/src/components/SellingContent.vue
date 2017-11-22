@@ -6,12 +6,13 @@
             <h5 class="card-title">Our Selling Today</h5>
           </div>
           <center>
-            <img style="height: 200px; display: block;" :src="item.imgUrl" :alt="item.imgUrl">
+            <img style="height: 150px; display: block;" :src="item.imgUrl" :alt="item.imgUrl">
           </center>
           <div class="card-body">
             <p class="card-text">Grab it fast</p>
             <a class="card-link">$ {{ item.price }}</a>
             <button type="button" class="btn btn-info" v-if="loginStatus === true" @click="buyItems(item)">Buy</button>
+            <button type="button" class="btn btn-danger" v-if="loginStatus === true" @click="minusOneItem(item)">X</button>
           </div>
           <div class="card-footer text-muted">
             {{ item.category }}
@@ -31,7 +32,7 @@ export default {
     ])
   },
   methods: {
-    ...mapMutations(['buyItems'])
+    ...mapMutations(['buyItems', 'minusOneItem'])
   }
 }
 </script>

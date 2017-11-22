@@ -1,22 +1,26 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <navbar></navbar>
     <div class="row">
-      <selling-content v-for="item in items" :key="item._id" :item="item"></selling-content>
+      <div class="col-md-8">
+        <div class="row">
+          <selling-content v-for="item in items" :key="item._id" :item="item"></selling-content>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <side-bar></side-bar>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Navbar from '@/components/Navbar'
 import SellingContent from '@/components/SellingContent'
 import SideBar from '@/components/SideBar'
 import { mapState, mapActions, mapMutations } from 'vuex'
 export default {
   components: {
     SellingContent,
-    Navbar,
     SideBar
   },
   name: 'HelloWorld',

@@ -11,10 +11,13 @@ Vue.use(Vuex)
 const state = {
   userId: '',
   name: '',
+  openModal: false,
   loginStatus: false,
   isAdmin: false,
   items: [],
-  cartslist: []
+  cartslist: [],
+  fixedbuy: [],
+  hasPaid: []
 }
 
 const mutations = {
@@ -39,15 +42,38 @@ const mutations = {
         amount: 1
       }
       state.cartslist.push(obj)
-      console.log('ini isi cartnya ya ', state.cartslist)
     } else {
       state.cartslist[idx].amount += 1
-      console.log('ini kalo itemnya sama ', state.cartslist)
+    }
+  },
+  minusOneItem (state, payload) {
+    console.log('produk yang gak jadi dibeli ', payload)
+    console.log(state.cartslist)
+    let idx = state.cartslist.findIndex((itemcart) => { return itemcart._id === payload._id })
+    console.log('indeksnya ', idx)
+    if (idx === -1 || state.cartslist[idx].amount === 0) {
+      console.log('lalalallalalla')
+      alert(`You haven't bought anything!`)
+      if (state.cartslist[idx].amount === 0) {
+        state.cartslist.splice(idx, 1)
+      }
+    } else {
+      console.log('ajajajajajajaj')
+      state.cartslist[idx].amount --
+      console.log('jumlah belanjaan ', state.cartslist[idx].amount)
     }
   },
   addNewItem (state, payload) {
     console.log('ini data payloadnya ', payload)
     state.items.push(payload)
+  },
+  setBuyingItem (state, payload) {
+    console.log('belanjaannya ', payload)
+    state.fixedbuy = payload[0]
+    console.log('udah pasti beli nih', state.fixedbuy)
+  },
+  pushPaidProduct (state, payload) {
+    state.hasPaid.push(payload)
   }
 }
 
@@ -87,6 +113,66 @@ const actions = {
     })
     .catch(err => {
       console.log('=======INI ERROR LHO================')
+      console.log(err)
+      console.log('====================================')
+    })
+  },
+  checkout () {
+    var config = {
+      headers: {
+        token: localStorage.getItem('token')
+      }
+    }
+    console.log('==========INI ITEM YANG DIBELI==========')
+    console.log(state.cartslist)
+    console.log('====================================')
+    console.log('================INI CONFIG==========')
+    console.log(config)
+    console.log('====================================')
+    http.post('/carts', state.cartslist, config)
+    .then(({data}) => {
+      console.log('=============UDAH MASUK BELANJAANNYA===============')
+      console.log(data)
+      console.log('====================================')
+    })
+    .catch(err => {
+      console.log('===================ERROR============')
+      console.error(err)
+      console.log('====================================')
+    })
+  },
+  getAllCarts ({commit}) {
+    var config = {
+      headers: {
+        token: localStorage.getItem('token')
+      }
+    }
+    http.get('/carts', config)
+    .then(({data}) => {
+      console.log('INI DATA YANG DITERIMA')
+      console.log(data)
+      commit('setBuyingItem', data)
+    })
+    .catch(err => {
+      console.log('INI ERROR')
+      console.error(err)
+    })
+  },
+  paidTheBill ({commit}, payload) {
+    var config = {
+      headers: {
+        token: localStorage.getItem('token')
+      }
+    }
+    http.put(`/carts/${payload._id}`, {}, config)
+    .then(({data}) => {
+      console.log('=========DATA YANG UDAH DIBELI==========')
+      console.log(data)
+      console.log('====================================')
+      commit('pushPaidProduct', data.updated)
+    })
+    .catch(err => {
+      console.log('=========ERROR LOOOOOG+++===========')
       console.log(err)
       console.log('====================================')
     })

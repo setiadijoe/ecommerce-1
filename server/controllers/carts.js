@@ -1,7 +1,7 @@
 const Cart = require('../models/CartModel')
 
 const getAllCart = (req, res) => {
-  Cart.find({buyer: req.headers.id})
+  Cart.find({buyer: req.headers.id, hasPaid: false})
   .populate('buyer')
   .populate('itemslist')
   .then(carts => {
@@ -11,9 +11,11 @@ const getAllCart = (req, res) => {
 }
 
 const addCart = (req, res) => {
+  console.log(req.body);
+  let body = req.body
   let cart = new Cart({
     buyer: req.headers.id,
-    itemslist: req.body.items
+    itemslist: body
   })
   cart.save()
   .then(carts => {
@@ -23,6 +25,23 @@ const addCart = (req, res) => {
     })
   })
   .catch(err => res.status(500).send(err))
+}
+
+const updateProduct = (req, res) => {
+  Cart.findByIdAndUpdate(req.params.id, {
+    $set: {
+      hasPaid: true
+    }
+  }, {new: true})
+  .then(updated => {
+    res.status(200).send({
+      message: 'Item has been Paid',
+      updated
+    })
+  })
+  .catch(err => {
+    res.status(500).send(err)
+  })
 }
 
 const removeCart = (req, res) => {
@@ -39,5 +58,6 @@ const removeCart = (req, res) => {
 module.exports = {
   getAllCart,
   addCart,
-  removeCart
+  removeCart,
+  updateProduct
 }
