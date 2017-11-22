@@ -21,7 +21,7 @@ import { mapState, mapActions, mapMutations } from 'vuex'
 export default {
   components: {
     SellingContent,
-    SideBar
+    SideBar 
   },
   name: 'HelloWorld',
   data () {
